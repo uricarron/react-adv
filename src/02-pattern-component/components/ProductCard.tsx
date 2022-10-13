@@ -1,41 +1,23 @@
+import { createContext } from "react";
 import styles from "../styles/styles.module.css";
-import noImage from "../assets/no-image.jpg";
 import { useCounter } from "../hooks/useCounter";
+import {
+  ProductCardChildrenProps,
+  ProductContextProps,
+} from "../interfaces/ProductCardInterface";
 
-interface ProductCardProps {
-  product: Product;
-}
+export const ProductContext = createContext({} as ProductContextProps);
+const { Provider } = ProductContext;
 
-interface Product {
-  id: string;
-  title: string;
-  img?: string;
-}
-
-export const ProductCard = ({ product }: ProductCardProps) => {
+export const ProductCard = ({
+  product,
+  children,
+}: ProductCardChildrenProps) => {
   const { counter, handleCounter } = useCounter({ initialValue: 0 });
 
   return (
-    <div className={styles.productCard}>
-      <img
-        className={styles.productImg}
-        src={product.img ? product.img : noImage}
-        alt="Coffee Mug"
-      />
-      {/* <img className={styles.productImg} src={noImage} alt="Coffee Mug" /> */}
-      <span className={styles.productDescription}>{product.title}</span>
-      <div className={styles.buttonsContainer}>
-        <button
-          className={styles.buttonMinus}
-          onClick={() => handleCounter(-1)}
-        >
-          -
-        </button>
-        <div className={styles.countLabel}>{counter}</div>
-        <button className={styles.buttonAdd} onClick={() => handleCounter(+1)}>
-          +
-        </button>
-      </div>
-    </div>
+    <Provider value={{ counter, handleCounter, product }}>
+      <div className={styles.productCard}>{children}</div>
+    </Provider>
   );
 };
