@@ -13,7 +13,11 @@ const product = {
 
 export const ShoppingPage = () => {
   return (
-    <div>
+    <div
+      style={{
+        width: "100%",
+      }}
+    >
       <h1>ShoppingPage</h1>
       <hr />
       <div
@@ -23,17 +27,30 @@ export const ShoppingPage = () => {
           flexWrap: "wrap",
         }}
       >
-        <ProductCard product={product}>
-          <ProductImage image="./coffee-mug.png" />
-          <ProductTitle title={"Coffee Mug"} />
-          <ProductButtons />
-        </ProductCard>
+        <div
+          style={{
+            display: "grid",
+            gap: "1rem",
+          }}
+        >
+          <ProductCard product={product}>
+            <ProductImage image="./coffee-mug.png" />
+            <ProductTitle title={"Coffee Mug"} />
+            <ProductButtons />
+          </ProductCard>
 
-        <ProductCard product={product}>
+          <ProductCard product={product}>
+            <ProductImage image="./coffee-mug.png" />
+            <ProductTitle title={"Coffee Mug"} />
+            <ProductButtons />
+          </ProductCard>
+
+          {/* <ProductCard product={product}>
           <ProductCard.Image />
           <ProductCard.Title />
           <ProductCard.Buttons />
-        </ProductCard>
+        </ProductCard> */}
+        </div>
       </div>
     </div>
   );
